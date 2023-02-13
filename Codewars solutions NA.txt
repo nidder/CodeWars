@@ -107,12 +107,9 @@ object SumOfDigits extends App {
 
   def digitalRoot(n: Int): Int = {
     val res = n.toString.split("").map(a => a.toInt).sum
-    
     if (res.toString.split("").length > 1){
       digitalRoot(res)
     } else res
-    
-    
   }
   digitalRoot(493193)
 }
