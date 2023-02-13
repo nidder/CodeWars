@@ -1,0 +1,118 @@
+Codewars solutions:
+
+//Maximum length difference (6kyu)
+
+//You are given two arrays a1 and a2 of strings. Each string is composed with letters from a to z. Let x be any string in the first array and y be any string in the second array.
+
+//Find max(abs(length(x) − length(y)))
+
+//If a1 and/or a2 are empty return -1 in each language except in Haskell (F#) where you will return Nothing (None).
+
+object Kata extends App {
+
+  def mxdiflg(a1: List[String], a2: List[String]): Int = {
+    if (a1.isEmpty | a2.isEmpty){
+      -1
+    } else {
+    a1.map( a=> {
+      a2.map( b => {
+        val calc = (a.length - b.length).abs
+        calc
+      })
+    }).flatten.max
+  }
+  }
+}
+
+//Who likes it? (6kyu)
+
+//You probably know the "like" system from Facebook and other pages. People can "like" blog posts, pictures or other items. We want to create the text that should be displayed next to such an item.
+
+//Implement the function which takes an array containing the names of people that like an item. 
+
+def likes(names: Array[String]): String = {
+    if (names.isEmpty){
+      "no one likes this"
+    } else if (names.length == 1){
+      println(names.head)
+      val head = names.head
+      s"$head likes this"
+    } else if (names.length == 2 ){
+      val first = names.head
+      val second = names.last
+      s"$first and $second like this"
+    } else if(names.length == 3){
+      val start = names.head
+      val middle = names(1)
+      val finish = names.last
+      s"$start, $middle and $finish like this"
+    } else {
+      val firstly = names.head
+      val secondly = names(1)
+      val length = names.length - 2
+      s"$firstly, $secondly and $length others like this"
+    }
+}
+
+//Multiples of 3 or 5 (6kyu)
+
+//If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
+
+//Finish the solution so that it returns the sum of all the multiples of 3 or 5 below the number passed in. Additionally, if the number is negative, return 0 (for languages that do have them).
+
+//Note: If the number is a multiple of both 3 and 5, only count it once.
+
+object MultiplesOf3Or5 extends App {   
+    def solution(number: Int): Long = {
+      (1 to number-1).map(a => {
+        if (a % 3 == 0 | a % 5 == 0 ){
+          a.toLong
+        } else {
+          0
+        }
+      }).sum
+    }
+    solution(100000)
+}
+
+// Given an array of integers, find the one that appears an odd number of times.(6kyu) 
+
+//There will always be only one integer that appears an odd number of times.
+
+//Examples
+//[7] should return 7, because it occurs 1 time (which is odd).
+//[0] should return 0, because it occurs 1 time (which is odd).
+//[1,1,2] should return 2, because it occurs 1 time (which is odd).
+//[0,1,0,1,0] should return 0, because it occurs 3 times (which is odd).
+//[1,2,2,3,3,3,4,3,3,3,2,2,1] should return 4, because it appears 1 time (which is odd).
+
+object FindTheOddInt {
+  def findOdd(xs: Seq[Int]): Int = {
+    xs.groupBy(number => number)
+    .map(grouped => (grouped._2.length, grouped._1))
+    .filter(filters => (filters._1 != 0 && filters._1 % 2 != 0))
+    .values.toList.head
+  }
+  findOdd(List(20,1,-1,2,-2,3,3,5,5,1,2,4,20,4,-1,-2,5))
+}
+
+
+// (6kyu) Digital root is the recursive sum of all the digits in a number.
+
+//Given n, take the sum of the digits of n. 
+//If that value has more than one digit, continue reducing in this way until a single-digit number is produced. 
+//The input will be a non-negative integer.
+
+object SumOfDigits extends App {
+
+  def digitalRoot(n: Int): Int = {
+    val res = n.toString.split("").map(a => a.toInt).sum
+    
+    if (res.toString.split("").length > 1){
+      digitalRoot(res)
+    } else res
+    
+    
+  }
+  digitalRoot(493193)
+}
