@@ -113,3 +113,102 @@ object SumOfDigits extends App {
   }
   digitalRoot(493193)
 }
+
+//Write a function that takes an integer as input, and returns the number of bits that are equal to one in the binary representation of that number. You can guarantee that input is non-negative.
+
+//Example: The binary representation of 1234 is 10011010010, so the function should return 5 in this case
+
+object Kata {
+
+  def countBits(n: Int): Int = n.toBinaryString.count(_ == '1')
+}
+
+(6KYU) //The goal of this exercise is to convert a string to a new string where each character in the new string is "(" if that character appears only once in the original string, or ")" if that character appears more than once in the original string. Ignore capitalization when determining if a character is a duplicate.
+
+def duplicateEncode(word: String): String = {
+    word.toLowerCase.map( a => if ( word.toLowerCase.count(_ == a) 
+    >1) { ")"
+      
+    } else "("
+    
+    ).mkString("")
+    
+  
+  } 
+
+(6kyu)You are given an array (which will have a length of at least 3, but could be very large) containing integers. The array is either entirely comprised of odd integers or entirely comprised of even integers except for a single integer N. Write a method that takes the array as an argument and returns this "outlier" N.
+
+object Parity {
+
+  def findOutlier(integers: List[Int]): Int = {
+    val odd = integers.filter( a=> a % 2 != 0)
+    val even = integers.filter( a=> a % 2 == 0)
+    if (odd.length == 1){
+      odd.head
+    } else even.head
+    
+  }
+}
+
+(6kyu) Counting duplicates - Write a function that will return the count of distinct case-insensitive alphabetic characters and numeric digits that occur more than once in the input string. The input string can be assumed to contain only alphabets (both uppercase and lowercase) and numeric digits.
+
+object Dups extends App  {
+  def duplicateCount(str: String): Int = {
+    str.toUpperCase.split("").groupBy(identity).toMap.map( a=> 
+    if (a._2.length > 1){
+      1 
+    } else 0
+    ).sum
+  }
+}
+(6KYU) - Write a function, persistence, that takes in a positive parameter num and returns its multiplicative persistence, which is the number of times you must multiply the digits in num until you reach a single digit.
+
+ object Multiplication {
+  
+  def persistence(n: Int, count: Int = 0): Int = {
+    
+    val b = n
+      .toString
+      .split("")
+      .map(a => {
+      a.toInt
+      }).reduce(_*_)
+    
+    if (b
+        .toString
+        .split("")
+        .length == 1){
+      if (n
+          .toString
+          .split("")
+          .length == 1){
+        count
+      } else {
+        count + 1
+      }
+    } else { 
+      persistence(b, count + 1)
+    }
+  }
+}
+
+(6KYU) Your task is to sort a given string. Each word in the string will contain a single number. This number is the position the word should have in the result.
+
+Note: Numbers can be from 1 to 9. So 1 will be the first word (not 0).
+
+If the input string is empty, return an empty string. The words in the input String will only contain valid consecutive numbers.
+
+object Text extends App {
+
+  def order(str: String): String = {
+    val splitted = str.split(" ").toList
+    val indexed = str.split("[\\D+]")
+    .filter(_.nonEmpty)
+    .toList
+    .zip(splitted)
+    .sorted.toList
+    indexed.map(a => a._2).mkString(" ")
+
+  }
+}
+
